@@ -102,3 +102,7 @@ jsonContent:
     excerpt: false
     categories: false
     tags: true
+
+# Security
+encrypt:
+  enable: true
