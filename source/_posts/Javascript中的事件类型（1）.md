@@ -4,7 +4,7 @@ date: 2019-09-04 20:06:42
 tags: [javascript,每日一问]
 ---
 
-写这边博文的契机，是在阅读Sortable.js源码的时候，发现了他们对dragable、pointenter事件的使用，还有事件的创建等等，这些都是以往没有接触过的，只使用了click，并没有深入理解事件的类型等。事件远不止click
+写这边博文的契机，是在阅读Sortable.js源码的时候，发现了他们对dragable、pointenter事件的使用，还有事件的创建等等，这些都是以往没有接触过的，只使用了click，并没有深入理解事件的类型等。事件远不止click。本文主要介绍了事件对象。下一期介绍事件类型。
 <!-- more -->
 说到Javascript的事件，我相信很多人的第一反应是onclick，onfocus，oncontextmenu。但是事实上，Javascript的事件种类远远超乎想象。
 
