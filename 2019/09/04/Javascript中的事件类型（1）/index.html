@@ -7,22 +7,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Vue组件-右键菜单 | YAQi的博客</title>
+  <title>Javascript中的事件类型(1) | YAQi的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Vue组件-右键菜单vue-contextmenu-json">
-<meta name="keywords" content="vue">
+  <meta name="description" content="写这边博文的契机，是在阅读Sortable.js源码的时候，发现了他们对dragable、pointenter事件的使用，还有事件的创建等等，这些都是以往没有接触过的，只使用了click，并没有深入理解事件的类型等。事件远不止click。本文主要介绍了事件对象。下一期介绍事件类型。">
+<meta name="keywords" content="javascript,每日一问">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Vue组件-右键菜单">
-<meta property="og:url" content="http://yoursite.com/2019/08/21/Vue组件-右键菜单/index.html">
+<meta property="og:title" content="Javascript中的事件类型(1)">
+<meta property="og:url" content="http://yoursite.com/2019/09/04/Javascript中的事件类型（1）/index.html">
 <meta property="og:site_name" content="YAQi的博客">
-<meta property="og:description" content="Vue组件-右键菜单vue-contextmenu-json">
+<meta property="og:description" content="写这边博文的契机，是在阅读Sortable.js源码的时候，发现了他们对dragable、pointenter事件的使用，还有事件的创建等等，这些都是以往没有接触过的，只使用了click，并没有深入理解事件的类型等。事件远不止click。本文主要介绍了事件对象。下一期介绍事件类型。">
 <meta property="og:locale" content="Chinese">
-<meta property="og:image" content="https://i.loli.net/2019/09/03/zbHwB7fgqG2IuQP.gif">
-<meta property="og:updated_time" content="2019-09-03T15:24:16.886Z">
+<meta property="og:image" content="https://i.loli.net/2019/09/04/2dLz4rGygmDTYWM.png">
+<meta property="og:updated_time" content="2019-09-05T14:32:12.695Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Vue组件-右键菜单">
-<meta name="twitter:description" content="Vue组件-右键菜单vue-contextmenu-json">
-<meta name="twitter:image" content="https://i.loli.net/2019/09/03/zbHwB7fgqG2IuQP.gif">
+<meta name="twitter:title" content="Javascript中的事件类型(1)">
+<meta name="twitter:description" content="写这边博文的契机，是在阅读Sortable.js源码的时候，发现了他们对dragable、pointenter事件的使用，还有事件的创建等等，这些都是以往没有接触过的，只使用了click，并没有深入理解事件的类型等。事件远不止click。本文主要介绍了事件对象。下一期介绍事件类型。">
+<meta name="twitter:image" content="https://i.loli.net/2019/09/04/2dLz4rGygmDTYWM.png">
   
     <link rel="alternative" href="/atom.xml" title="YAQi的博客" type="application/atom+xml">
   
@@ -140,87 +140,77 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Vue组件-右键菜单" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Javascript中的事件类型（1）" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Vue组件-右键菜单
+      Javascript中的事件类型(1)
     </h1>
   
 
         
-        <a href="/2019/08/21/Vue组件-右键菜单/" class="archive-article-date">
-  	<time datetime="2019-08-21T14:32:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-21</time>
+        <a href="/2019/09/04/Javascript中的事件类型（1）/" class="archive-article-date">
+  	<time datetime="2019-09-04T12:06:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-04</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Vue组件-右键菜单vue-contextmenu-json</p>
+        <p>写这边博文的契机，是在阅读Sortable.js源码的时候，发现了他们对dragable、pointenter事件的使用，还有事件的创建等等，这些都是以往没有接触过的，只使用了click，并没有深入理解事件的类型等。事件远不止click。本文主要介绍了事件对象。下一期介绍事件类型。</p>
 <a id="more"></a>
-<h2 id="Vue-Contextmenu-json"><a href="#Vue-Contextmenu-json" class="headerlink" title="Vue-Contextmenu-json"></a>Vue-Contextmenu-json</h2><p>基于Vue的右键菜单组件，最开始开发的主要目的是想通过json数据来创建菜单，而不是再在对应的页面中写右键菜单的template模板，所有的工作只需要一个json对象和绑定到元素的指令。相关的Github主页是 <a href="https://github.com/WongYAQi/vue-contextmenu-json" target="_blank" rel="noopener">https://github.com/WongYAQi/vue-contextmenu-json</a></p>
-<h2 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h2><p>npm安装</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install vue-contextmenu-json</span><br></pre></td></tr></table></figure>
+<p>说到Javascript的事件，我相信很多人的第一反应是onclick，onfocus，oncontextmenu。但是事实上，Javascript的事件种类远远超乎想象。</p>
+<h2 id="事件对象"><a href="#事件对象" class="headerlink" title="事件对象"></a>事件对象</h2><p>事件对象的原始接口是<code>Event interface</code>，他们代表着会执行在DOM元素上的“事件”。<br>Event对象的属性有：  </p>
+<h3 id="对象属性"><a href="#对象属性" class="headerlink" title="对象属性"></a>对象属性</h3><p><strong>bubbles</strong><br>bubbles是Boolean类型，指示事件是否可以冒泡，具体表现就是如果事件不可以冒泡，那我在执行ul-&gt; li 的事件的时候，执行li的对应事件，不会触发ul的对应事件。</p>
+<p><strong>cancelable</strong><br>cancelable是Boolean类型，指示事件是否可以取消，如果事件可以取消，那么就可以通过event.preventDefault()方法避免触发原事件，典型就是a标签。  </p>
+<p><strong>currentTarget</strong><br><strong>target</strong><br>上面两个属性非常的容易混淆，让人迷惑。区分的话，主要从<code>Current</code>关键字入手，currentTarget代表当前触发事件方法的元素，而target代表我们人为、手动触发事件的元素。简单的说，target永远指向操作的源头,起源。    </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul id=<span class="string">'0'</span> &gt;</span><br><span class="line">  &lt;li id=<span class="string">'1'</span>/&gt;</span><br><span class="line">  &lt;li id=<span class="string">'2'</span>/&gt;</span><br><span class="line">&lt;<span class="regexp">/ul&gt;</span></span><br><span class="line"><span class="regexp">当我们触发li（2）的事件的时候，按照DOM事件流，最先触发的是li(2)的事件，然后冒泡，触发ul的相关事件。当触发li(2)的时候，currentTarget就是2，而target也是2。而冒泡触发0的时候，CurrentTarget是0，target是2.</span></span><br></pre></td></tr></table></figure>
 
-<p>in main.js</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> VueContextMenu <span class="keyword">from</span> <span class="string">'vue-contextmenu-json'</span>;</span><br><span class="line">Vue.use(VueContextmenu);</span><br></pre></td></tr></table></figure>
-
-<p>in *.vue</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">        &lt;anyElement v-contextmenu=<span class="string">'&#123;array:theArrayData,id:theIdYouWant&#125;'</span>&gt;&lt;/anyElement&gt;</span><br><span class="line">    &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">        data () &#123;</span><br><span class="line">            <span class="keyword">return</span> &#123;</span><br><span class="line">                theArrayData:[</span><br><span class="line">                    &#123;<span class="attr">name</span>:<span class="string">'Operation 1'</span>,<span class="attr">function</span>:<span class="string">'funca'</span>,<span class="attr">child</span>:<span class="literal">null</span>&#125;,</span><br><span class="line">                    &#123;<span class="attr">name</span>:<span class="string">'Operation 2'</span>,<span class="attr">function</span>:<span class="string">'funca'</span>,<span class="attr">child</span>:[</span><br><span class="line">                        &#123;<span class="attr">name</span>:<span class="string">'Operation 2-1'</span>,<span class="attr">function</span>:<span class="string">'funca'</span>&#125;</span><br><span class="line">                    ]&#125;</span><br><span class="line">                ]</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        methods:&#123;</span><br><span class="line">            funca () &#123;</span><br><span class="line">                <span class="built_in">console</span>.log(<span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>参数Parameter</p>
+<p><strong>eventPhase</strong><br>eventPhase是一个无符号整型，简单的理解就是正数。在这里用来指示当前事件所处的事件流的代号。  </p>
 <table>
 <thead>
 <tr>
-<th>name</th>
-<th>type</th>
-<th>content</th>
+<th>值</th>
+<th>事件流</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>array</td>
-<td>Array</td>
-<td>json对象，用来生成菜单信息</td>
+<td>1</td>
+<td>捕获流</td>
 </tr>
 <tr>
-<td>id</td>
-<td>String</td>
-<td>菜单id，区分同一个页面中的多个菜单组件</td>
+<td>2</td>
+<td>处理流</td>
+</tr>
+<tr>
+<td>3</td>
+<td>冒泡流</td>
 </tr>
 </tbody></table>
-<p>And the array parameter is</p>
-<table>
-<thead>
-<tr>
-<th>name</th>
-<th>type</th>
-<th>content</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>name</td>
-<td>String</td>
-<td>右键菜单的显示名称</td>
-</tr>
-<tr>
-<td>function</td>
-<td>String</td>
-<td>右键菜单操作，只需要传入一个methods中的函数名称，methods的函数具有this(指向当前vue实例)，nodeNow(指向右键点击时的DOM元素)，event（事件对象）</td>
-</tr>
-<tr>
-<td>child</td>
-<td>Array</td>
-<td>多级菜单，参数和现在的一致</td>
-</tr>
-</tbody></table>
-<h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><p><img src="https://i.loli.net/2019/09/03/zbHwB7fgqG2IuQP.gif" alt="wEIACnURtSVmuP9.gif"></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">        &lt;ul v-contextmenu=<span class="string">'&#123;array:ctmArray,id:"c"&#125;'</span>&gt;</span><br><span class="line">            &lt;li v-<span class="keyword">for</span>=<span class="string">'item in array'</span> :key=<span class="string">'item.name'</span>&gt;</span><br><span class="line">                    &#123;&#123;item.name&#125;&#125;</span><br><span class="line">            &lt;<span class="regexp">/li&gt;</span></span><br><span class="line"><span class="regexp">        &lt;/u</span>l&gt;</span><br><span class="line">        &lt;!--</span><br><span class="line">        &lt;button @click=<span class="string">'comName = null'</span>&gt;button&lt;<span class="regexp">/button&gt;</span></span><br><span class="line"><span class="regexp">        &lt;i-ctm  v-if='comName === "i-ctm"' :array='ctmArray'&gt;&lt;/i</span>-ctm&gt;</span><br><span class="line">        --&gt;</span><br><span class="line">    &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">import</span> iCtm <span class="keyword">from</span> <span class="string">'./components/contextmenu/index.js'</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    name:<span class="string">'app'</span>,</span><br><span class="line">    components:&#123;</span><br><span class="line">        <span class="string">'i-ctm'</span>:iCtm</span><br><span class="line">    &#125;,</span><br><span class="line">    data () &#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            comName:<span class="string">'i-ctm'</span>,</span><br><span class="line">            array:[</span><br><span class="line">                &#123;<span class="attr">name</span>:<span class="string">'Li 1'</span>&#125;,</span><br><span class="line">                &#123;<span class="attr">name</span>:<span class="string">'Li 2'</span>&#125;</span><br><span class="line">            ],</span><br><span class="line">            ctmArray:[</span><br><span class="line">                &#123;<span class="attr">name</span>:<span class="string">'button 1'</span>,<span class="attr">function</span>:<span class="string">'funca'</span>,<span class="attr">child</span>:[</span><br><span class="line">                    &#123;<span class="attr">name</span>:<span class="string">'1-1111111'</span>,<span class="attr">function</span>:<span class="string">'funca'</span>,<span class="attr">child</span>:[</span><br><span class="line">                        &#123;<span class="attr">name</span>:<span class="string">'1-1111-11111'</span>,<span class="attr">function</span>:<span class="string">'funca'</span>&#125;</span><br><span class="line">                    ]&#125;</span><br><span class="line">                ]&#125;,</span><br><span class="line">                &#123;<span class="attr">name</span>:<span class="string">'button 2'</span>,<span class="attr">function</span>:<span class="string">'funca'</span>&#125;,</span><br><span class="line">                &#123;<span class="attr">name</span>:<span class="string">'button 3'</span>,<span class="attr">function</span>:<span class="string">'funca'</span>&#125;,</span><br><span class="line">                &#123;<span class="attr">name</span>:<span class="string">'button 4'</span>,<span class="attr">function</span>:<span class="string">'funca'</span>&#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    methods:&#123;</span><br><span class="line">        funca (node) &#123;</span><br><span class="line">            <span class="keyword">this</span>.array.push(&#123;<span class="attr">name</span>:<span class="string">'Li 3'</span>&#125;);</span><br><span class="line">            <span class="built_in">console</span>.log(node); <span class="comment">//  the element you open contextmenu, like 'Li 3' li</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+<p>相关的流，可以参考附图。这个图非常的详细。  </p>
+<p><img src="https://i.loli.net/2019/09/04/2dLz4rGygmDTYWM.png" alt="eventflow _1_.png"></p>
+<p><strong>timeStamp</strong><br>DOMTimeStamp类型，一个时间戳，精确到毫秒级别，指示这个事件是什么时候生成的。有的系统可能不会有这个值，那么就返回0.    </p>
+<p><strong>type</strong><br>type属性是一个DOMString类型，用来表示当前事件的类型是什么，比如click,contextmenu,dbclick。</p>
+<h3 id="对象方法"><a href="#对象方法" class="headerlink" title="对象方法"></a>对象方法</h3><p><strong>initEvent</strong><br>event.initEvent(eventName,eventCanBubble,eventCanCel)方法，用来为Event实例初始化。虽然现在有很多方法被废弃了。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="built_in">document</span>.createEvent(<span class="string">'Event'</span>);</span><br><span class="line">a.initEvent(<span class="string">'build'</span>,<span class="literal">true</span>,<span class="literal">true</span>);</span><br></pre></td></tr></table></figure>
 
-<h2 id="End"><a href="#End" class="headerlink" title="End"></a>End</h2><p>If you have any problem or thoughts you think will make this component better,please let me know .</p>
+<p>通过这种方式来创建事件的相关属性，后续再进行事件的注册，触发。比如说click,dbclick这种事件都是浏览器已经注册完成了。</p>
+<p><strong>preventDefault</strong><br>preventDefault()方法用来阻止事件的默认行为。这种方法只能作用在<code>cancelable</code>为true的事件上，为一个false的事件触发方法，不会有任何的结果。<br>但是，什么叫做事件的默认行为呢？哪些行为是默认行为呢？<br>举一个例子，checkbox的默认行为就是：点击后勾选和取消勾选。如果我们阻止了默认行为，那么就不会有勾选发生。<br>再比如a标签，点击的默认行为就是跳转到href指定的路径。如果阻止了，就不会产生跳转的行为。<br>但是要注意，这种阻止<code>不会影响冒泡行为</code>，该冒的泡那还是要冒的。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;div id=<span class="string">'1'</span>&gt;</span><br><span class="line">        <span class="number">1</span></span><br><span class="line">        &lt;input type=<span class="string">'checkbox'</span> id=<span class="string">'2'</span>&gt;&lt;/input&gt;</span><br><span class="line">        &lt;a href=<span class="string">'http://www.baidu.com'</span> id=<span class="string">'3'</span>&gt;百度&lt;<span class="regexp">/a&gt;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>div&gt;</span><br><span class="line">&lt;<span class="regexp">/body&gt;</span></span><br><span class="line"><span class="regexp">&lt;script&gt;</span></span><br><span class="line"><span class="regexp">    var a = document.getElementById('3');</span></span><br><span class="line"><span class="regexp">    a.addEventListener('click',event=&gt;&#123;</span></span><br><span class="line"><span class="regexp">        event.preventDefault(); /</span><span class="regexp">/不会触发a标签的导航</span></span><br><span class="line"><span class="regexp">        /</span><span class="regexp">/id(2)，则不会触发checkbox的勾选</span></span><br><span class="line"><span class="regexp">    &#125;)</span></span><br><span class="line"><span class="regexp">&lt;/</span>script&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>stopPropagation</strong><br>stopPropagation()方法，<del>用来阻止冒泡</del>，用来阻止事件的继续执行。说冒泡是不准确的，我们甚至可以在捕获阶段就进行拦截。  </p>
+<p>说完了事件对象的属性与方法，接下来说一说事件的创建。</p>
+<h2 id="事件创建"><a href="#事件创建" class="headerlink" title="事件创建"></a>事件创建</h2><p>最古老的方式来创建一个事件</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="built_in">document</span>.createEvent(<span class="string">'Event'</span>);</span><br><span class="line">a.initEvent(<span class="string">'build'</span>,<span class="literal">true</span>,<span class="literal">true</span>);</span><br><span class="line"><span class="keyword">var</span> element = <span class="built_in">document</span>.getElementById(<span class="string">'1'</span>);</span><br><span class="line">element.addEventListener(<span class="string">'build'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line">    ...code</span><br><span class="line">&#125;);</span><br><span class="line">element.dispatchEvent(a);</span><br></pre></td></tr></table></figure>
+
+<p>通过这种方式我们实现了一个Event类型的事件，Event类型是最原始的事件接口，还有其他的事件接口，比如MouseEvent，UIEvent，这些都是Event接口的子类。</p>
+<p>而现在最推荐的，主流的方式，是使用CustomEvent构造函数，这种方式创建了一个自定义的事件，仍然是以dispatchEvent的方式触发。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> CustomEvent(<span class="string">'cat'</span>,&#123;</span><br><span class="line">    detail:&#123;</span><br><span class="line">        <span class="comment">//detail属性代表什么？</span></span><br><span class="line">        <span class="comment">//代表事件触发时传入的数据信息</span></span><br><span class="line">    &#125;,</span><br><span class="line">    cancelable:<span class="literal">true</span>, <span class="comment">//or false</span></span><br><span class="line">    bubbles:<span class="literal">true</span> <span class="comment">// or false</span></span><br><span class="line">&#125;)</span><br><span class="line">element.addEventListener(<span class="string">'cat'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(event.detail);</span><br><span class="line">&#125;);</span><br><span class="line">element.dispatchEvent(a);</span><br></pre></td></tr></table></figure>
+
+<p>今天的内容到此为止，明天继续介绍事件的类型，主要进行Event,UIEvent,MouseEvent这种事件接口的介绍。</p>
 
       
 
@@ -255,7 +245,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">每日一问</a>
         		</li>
       		
 		</ul>
@@ -311,7 +305,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/08/21/Vue组件-右键菜单/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/09/04/Javascript中的事件类型（1）/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -325,18 +319,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/09/03/Javascript中的立即执行函数/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/09/05/为什么可以在CMD中执行npm命令/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          Javascript中的立即执行函数
+          为什么可以在CMD中执行npm命令
         
       </div>
     </a>
   
   
-    <a href="/2019/07/22/隐式类型转换/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">隐式类型转换</div>
+    <a href="/2019/09/03/Javascript中的立即执行函数/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Javascript中的立即执行函数</div>
       <i class="icon-circle-right"></i>
     </a>
   
