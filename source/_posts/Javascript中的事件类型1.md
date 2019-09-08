@@ -87,7 +87,7 @@ stopPropagation()方法，~~~用来阻止冒泡~~~，用来阻止事件的继续
 
 说完了事件对象的属性与方法，接下来说一说事件的创建。
 ## 事件创建
-最古老的方式来创建一个事件
+最古老的方式来创建一个自定义事件
 ```javascript
 var a = document.createEvent('Event');
 a.initEvent('build',true,true);
