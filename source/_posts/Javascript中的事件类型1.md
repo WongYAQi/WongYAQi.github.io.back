@@ -19,8 +19,7 @@ bubbles是Boolean类型，指示事件是否可以冒泡，具体表现就是如
 **cancelable**
 cancelable是Boolean类型，指示事件是否可以取消，如果事件可以取消，那么就可以通过event.preventDefault()方法避免触发原事件，典型就是a标签。  
 
-**currentTarget**  
-**target**  
+**currentTarget,target**  
 上面两个属性非常的容易混淆，让人迷惑。区分的话，主要从`Current`关键字入手，currentTarget代表当前触发事件方法的元素，而target代表我们人为、手动触发事件的元素。简单的说，target永远指向操作的源头,起源。    
 ```javascript
 <ul id='0' >
