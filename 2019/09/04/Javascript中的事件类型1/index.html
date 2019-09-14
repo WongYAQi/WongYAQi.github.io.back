@@ -10,7 +10,7 @@
   <title>Javascript中的事件类型(1) | YAQi的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="写这边博文的契机，是在阅读Sortable.js源码的时候，发现了他们对dragable、pointenter事件的使用，还有事件的创建等等，这些都是以往没有接触过的，只使用了click，并没有深入理解事件的类型等。事件远不止click。本文主要介绍了事件对象。下一期介绍事件类型。">
-<meta name="keywords" content="每日一问,javascript">
+<meta name="keywords" content="javascript,每日一问">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Javascript中的事件类型(1)">
 <meta property="og:url" content="http://yoursite.com/2019/09/04/Javascript中的事件类型1/index.html">
@@ -18,7 +18,7 @@
 <meta property="og:description" content="写这边博文的契机，是在阅读Sortable.js源码的时候，发现了他们对dragable、pointenter事件的使用，还有事件的创建等等，这些都是以往没有接触过的，只使用了click，并没有深入理解事件的类型等。事件远不止click。本文主要介绍了事件对象。下一期介绍事件类型。">
 <meta property="og:locale" content="Chinese">
 <meta property="og:image" content="https://i.loli.net/2019/09/04/2dLz4rGygmDTYWM.png">
-<meta property="og:updated_time" content="2019-09-08T03:30:19.523Z">
+<meta property="og:updated_time" content="2019-09-09T13:30:06.570Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Javascript中的事件类型(1)">
 <meta name="twitter:description" content="写这边博文的契机，是在阅读Sortable.js源码的时候，发现了他们对dragable、pointenter事件的使用，还有事件的创建等等，这些都是以往没有接触过的，只使用了click，并没有深入理解事件的类型等。事件远不止click。本文主要介绍了事件对象。下一期介绍事件类型。">
@@ -166,7 +166,7 @@
 <h2 id="事件对象"><a href="#事件对象" class="headerlink" title="事件对象"></a>事件对象</h2><p>事件对象的原始接口是<code>Event interface</code>，他们代表着会执行在DOM元素上的“事件”。<br>Event对象的属性有：  </p>
 <h3 id="对象属性"><a href="#对象属性" class="headerlink" title="对象属性"></a>对象属性</h3><p><strong>bubbles</strong><br>bubbles是Boolean类型，指示事件是否可以冒泡，具体表现就是如果事件不可以冒泡，那我在执行ul-&gt; li 的事件的时候，执行li的对应事件，不会触发ul的对应事件。</p>
 <p><strong>cancelable</strong><br>cancelable是Boolean类型，指示事件是否可以取消，如果事件可以取消，那么就可以通过event.preventDefault()方法避免触发原事件，典型就是a标签。  </p>
-<p><strong>currentTarget</strong><br><strong>target</strong><br>上面两个属性非常的容易混淆，让人迷惑。区分的话，主要从<code>Current</code>关键字入手，currentTarget代表当前触发事件方法的元素，而target代表我们人为、手动触发事件的元素。简单的说，target永远指向操作的源头,起源。    </p>
+<p><strong>currentTarget,target</strong><br>上面两个属性非常的容易混淆，让人迷惑。区分的话，主要从<code>Current</code>关键字入手，currentTarget代表当前触发事件方法的元素，而target代表我们人为、手动触发事件的元素。简单的说，target永远指向操作的源头,起源。    </p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul id=<span class="string">'0'</span> &gt;</span><br><span class="line">  &lt;li id=<span class="string">'1'</span>/&gt;</span><br><span class="line">  &lt;li id=<span class="string">'2'</span>/&gt;</span><br><span class="line">&lt;<span class="regexp">/ul&gt;</span></span><br><span class="line"><span class="regexp">当我们触发li（2）的事件的时候，按照DOM事件流，最先触发的是li(2)的事件，然后冒泡，触发ul的相关事件。当触发li(2)的时候，currentTarget就是2，而target也是2。而冒泡触发0的时候，CurrentTarget是0，target是2.</span></span><br></pre></td></tr></table></figure>
 
 <p><strong>eventPhase</strong><br>eventPhase是一个无符号整型，简单的理解就是正数。在这里用来指示当前事件所处的事件流的代号。  </p>
@@ -245,11 +245,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">每日一问</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">每日一问</a>
         		</li>
       		
 		</ul>
@@ -453,11 +453,11 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">每日一问</a>
+                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
+                <a href="javascript:void(0)" class="js-tag color5">每日一问</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -465,11 +465,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+                <a href="javascript:void(0)" class="js-tag color4">计算机</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">计算机</a>
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
             
             <div class="clearfix"></div>
