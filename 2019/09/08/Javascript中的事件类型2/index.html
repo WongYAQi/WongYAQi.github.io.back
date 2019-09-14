@@ -7,15 +7,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: hexo | YAQi的博客</title>
+  <title>每日一问·Javascript中的事件类型(2) | YAQi的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="YAQi的博客">
-<meta property="og:url" content="http://yoursite.com/tags/hexo/index.html">
+  <meta name="description" content="写这边博文的契机，是在阅读Sortable.js源码的时候，发现了他们对dragable、pointenter事件的使用，还有事件的创建等等，这些都是以往没有接触过的，只使用了click，并没有深入理解事件的类型等。事件远不止click。本文主要介绍了各种事件类型。【未完】">
+<meta name="keywords" content="每日一问,javascript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="每日一问·Javascript中的事件类型(2)">
+<meta property="og:url" content="http://yoursite.com/2019/09/08/Javascript中的事件类型2/index.html">
 <meta property="og:site_name" content="YAQi的博客">
+<meta property="og:description" content="写这边博文的契机，是在阅读Sortable.js源码的时候，发现了他们对dragable、pointenter事件的使用，还有事件的创建等等，这些都是以往没有接触过的，只使用了click，并没有深入理解事件的类型等。事件远不止click。本文主要介绍了各种事件类型。【未完】">
 <meta property="og:locale" content="Chinese">
+<meta property="og:image" content="https://i.loli.net/2019/09/08/te97bkqNoEX2AFh.png">
+<meta property="og:updated_time" content="2019-09-08T15:16:37.769Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="YAQi的博客">
+<meta name="twitter:title" content="每日一问·Javascript中的事件类型(2)">
+<meta name="twitter:description" content="写这边博文的契机，是在阅读Sortable.js源码的时候，发现了他们对dragable、pointenter事件的使用，还有事件的创建等等，这些都是以往没有接触过的，只使用了click，并没有深入理解事件的类型等。事件远不止click。本文主要介绍了各种事件类型。【未完】">
+<meta name="twitter:image" content="https://i.loli.net/2019/09/08/te97bkqNoEX2AFh.png">
   
     <link rel="alternative" href="/atom.xml" title="YAQi的博客" type="application/atom+xml">
   
@@ -133,60 +140,182 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Javascript中的事件类型2" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/07/03/如何修改Hexo主题yilia/" class="archive-article-date">
-  	<time datetime="2019-07-03T14:38:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-03</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/03/如何修改Hexo主题yilia/">如何修改Hexo主题yilia</a>
+    <h1 class="article-title" itemprop="name">
+      每日一问·Javascript中的事件类型(2)
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2019/09/08/Javascript中的事件类型2/" class="archive-article-date">
+  	<time datetime="2019-09-08T02:48:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-08</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>写这边博文的契机，是在阅读Sortable.js源码的时候，发现了他们对dragable、pointenter事件的使用，还有事件的创建等等，这些都是以往没有接触过的，只使用了click，并没有深入理解事件的类型等。事件远不止click。本文主要介绍了各种事件类型。<br>【未完】</p>
+<a id="more"></a>
+
+<h1 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h1><p>一提到javascript中的事件类型，大家第一时间想到的肯定是click，而click属性MouseEvent类，其中除了click还具有哪些事件呢？除了MouseEvent鼠标事件，还有哪些事件大类呢？</p>
+<h2 id="Event类"><a href="#Event类" class="headerlink" title="Event类"></a>Event类</h2><p>Event类是一个抽象的类。代表的是所有发生在DOM中的事件。下面派生了很多的子类。可以从下图中查阅。接下来我们讲一下最常用的几个事件类型。<br><img src="https://i.loli.net/2019/09/08/te97bkqNoEX2AFh.png" alt="微信图片_20190908112541.png"></p>
+<h2 id="MouseEvent"><a href="#MouseEvent" class="headerlink" title="MouseEvent"></a>MouseEvent</h2><p>鼠标事件，此事件都是与鼠标有关的。常见一点的click，contextmenu，dbclick都是属于这个事件类型。</p>
+<h3 id="创建事件"><a href="#创建事件" class="headerlink" title="创建事件"></a>创建事件</h3><p>可以通过手动创建事件，进行触发。当然，更多的我们是直接操作click,dbclick这些已经定义好的事件。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">''</span>).addEventListener(<span class="string">'click'</span>,event=&gt;&#123;</span><br><span class="line">    <span class="comment">// 操作</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">let</span> evt = <span class="keyword">new</span> MouseEvent(<span class="string">'eventname'</span>,&#123;</span><br><span class="line">    <span class="comment">// 可选项</span></span><br><span class="line">    screenX: ..</span><br><span class="line">    screenY: ..</span><br><span class="line">&#125;)</span><br><span class="line">doc.addEventListener(<span class="string">'eventname'</span>,event=&gt;&#123;</span><br><span class="line">    <span class="comment">// ..操作  </span></span><br><span class="line">&#125;)</span><br><span class="line">doc.dispatchEvent(evt)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Vue的框架中事件相关的内容是不是使用了自定义事件？</p>
+</blockquote>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">每日一问</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/09/08/Javascript中的事件类型2/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2019/09/05/为什么可以在CMD中执行npm命令/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">为什么可以在CMD中执行npm命令</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -209,9 +338,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
