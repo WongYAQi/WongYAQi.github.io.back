@@ -56,6 +56,7 @@ doc.dispatchEvent(evt)
 
 **button,buttons,which**  
 button表示当前触发鼠标事件的案件，是哪一个。比如我们通过mouseup事件，每一个鼠标按键都会触发mouseup事件。  
+
 |值|含义|
 |-|-|
 |0|主要按键（右手鼠标的左键）|
@@ -125,7 +126,7 @@ Event -> UIEvent -> MouseEvent -> WheelEvent
 TODO 接下来介绍相关的事件，以及属性
 
 ## ClipboardEvent
-剪贴板事件，用来实现复制粘贴。还是说回富文本框，
+剪贴板事件，用来实现复制粘贴。还是说回富文本框
 
 ## CompositionEvent
 文本输入事件。继续富文本框
