@@ -124,6 +124,19 @@ Event -> UIEvent -> MouseEvent -> WheelEvent
 > 首先注意一点，元素本身是不允许拖动的，必须为元素增加`draggable`属性，并设置为true字符串，才可以拖动元素！！！
 
 TODO 接下来介绍相关的事件，以及属性
+### 相关属性
+**dragTransfer**  
+
+### 事件
+**drag**  
+drag事件将发生在不断执行拖动的过程中  
+**dragstart,dragend**  
+dragStart事件只会发生在拖动最开始的时候,而end事件则是松开鼠标完成拖动的时候  
+**dragenter,dragleave**  
+enter和leave用来表示进入和离开，目标是可放置元素或者body。进入这两种有啥区别呢？  
+添加事件的元素，将被作为目标元素，比如我们为div内的元素p添加了dragenter事件，那么只有当某个拖动元素，进入到p元素的时候，才会触发dragenter事件，进入div是不会触发的，而且，事件并不是绑定在拖动元素上的！！！   
+**deagover**  
+
 
 ## ClipboardEvent
 剪贴板事件，用来实现复制粘贴。还是说回富文本框
