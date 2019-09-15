@@ -7,15 +7,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2019 | YAQi的博客</title>
+  <title>每日一问·虚拟DOM是如何实现的 | YAQi的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="YAQi的博客">
-<meta property="og:url" content="http://yoursite.com/archives/2019/index.html">
+  <meta name="description" content="虚拟DOM ，Virtual DOM是用于减少DOM操作过程中的性能消耗。那么VDOM是如何进行渲染与DIFF的呢？">
+<meta name="keywords" content="每日一问,Javascript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="每日一问·虚拟DOM是如何实现的">
+<meta property="og:url" content="http://yoursite.com/2019/09/14/虚拟DOM的Patch/index.html">
 <meta property="og:site_name" content="YAQi的博客">
+<meta property="og:description" content="虚拟DOM ，Virtual DOM是用于减少DOM操作过程中的性能消耗。那么VDOM是如何进行渲染与DIFF的呢？">
 <meta property="og:locale" content="Chinese">
+<meta property="og:image" content="https://i.loli.net/2019/09/15/N7XLjRSAatc5W93.png">
+<meta property="og:image" content="https://i.loli.net/2019/09/15/XMNq9OywRzmU7H1.png">
+<meta property="og:updated_time" content="2019-09-15T06:44:56.738Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="YAQi的博客">
+<meta name="twitter:title" content="每日一问·虚拟DOM是如何实现的">
+<meta name="twitter:description" content="虚拟DOM ，Virtual DOM是用于减少DOM操作过程中的性能消耗。那么VDOM是如何进行渲染与DIFF的呢？">
+<meta name="twitter:image" content="https://i.loli.net/2019/09/15/N7XLjRSAatc5W93.png">
   
     <link rel="alternative" href="/atom.xml" title="YAQi的博客" type="application/atom+xml">
   
@@ -133,36 +141,147 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-虚拟DOM的Patch" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/09/14/虚拟DOM的Patch/" class="archive-article-date">
-  	<time datetime="2019-09-14T11:45:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-14</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/09/14/虚拟DOM的Patch/">每日一问·虚拟DOM是如何实现的</a>
+    <h1 class="article-title" itemprop="name">
+      每日一问·虚拟DOM是如何实现的
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2019/09/14/虚拟DOM的Patch/" class="archive-article-date">
+  	<time datetime="2019-09-14T11:45:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-14</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>虚拟DOM ，Virtual DOM是用于减少DOM操作过程中的性能消耗。那么VDOM是如何进行渲染与DIFF的呢？</p>
+<a id="more"></a>
+
+<p>在学习Vue框架的时候，必不可少的接触到了虚拟DOM的内容，对于虚拟DOM，相信每个人都能说出一点出来</p>
+<ul>
+<li>Vue响应式框架中用到了  </li>
+<li>为了减少DOM消耗  </li>
+<li>用JS对象替换DOM元素操作  </li>
+</ul>
+<p>但是，他是怎么实现的呢？为什么可以实现从对象到html的渲染？是如何识别其中的内容的？<br>接下来，用snabbdom.js进行分析</p>
+<h1 id="Snabbdom-js"><a href="#Snabbdom-js" class="headerlink" title="Snabbdom.js"></a>Snabbdom.js</h1><p>Snabbdom是Vue开发虚拟DOM的基础，整体是以<strong>TypeScript</strong>为基础开发，Snabbdom是偏底层的框架，它并不是只能被使用在Vue中，还有其他很多的项目用到了他，而Vue的话，还要考虑如何将响应式对应，指令加入到虚拟DOM中进行渲染。  </p>
+<h2 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">--helpers  </span><br><span class="line">----attachto.ts   </span><br><span class="line">--modules  </span><br><span class="line">----attributes.ts  </span><br><span class="line">----class.ts  </span><br><span class="line">----dataset.ts  </span><br><span class="line">----eventlisteners.ts  </span><br><span class="line">----hero.ts  </span><br><span class="line">----module.ts // 钩子函数模块  </span><br><span class="line">----props.ts  </span><br><span class="line">----style.ts  </span><br><span class="line">--h.ts  </span><br><span class="line">--hooks.ts  </span><br><span class="line">--htmldomapi.ts  </span><br><span class="line">--is.ts  </span><br><span class="line">--snabbdom.bundle.ts  </span><br><span class="line">--snabbdom.ts  </span><br><span class="line">--thunk.ts  </span><br><span class="line">--tovnode.ts  </span><br><span class="line">--vnode.ts  // 定义vnode,vnodedata结构</span><br></pre></td></tr></table></figure>
+
+<h2 id="核心功能"><a href="#核心功能" class="headerlink" title="核心功能"></a>核心功能</h2><h3 id="init"><a href="#init" class="headerlink" title="init()"></a>init()</h3><p>Snabbdom要求先运行init函数进行初始化，提供list数组，最终返回一个patch方法用来进行渲染。<br>那么Init方法主要做了什么呢？  </p>
+<ol>
+<li>声明了一堆函数  </li>
+<li>声明了一个hooks钩子数组对象，其中hooks与传入的Modules数组中的模块钩子函数进行比较。</li>
+<li>返回patch方法</li>
+</ol>
+<p>那么我就有一个问题了  </p>
+<blockquote>
+<p>Vue的钩子函数是基于Snabbdom开发的吗？  </p>
+</blockquote>
+<h3 id="h-ts"><a href="#h-ts" class="headerlink" title="h.ts"></a>h.ts</h3><p>继续j看h.ts，因为Snabbdom.js就是以h()方法来生成VNODE的。  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> vnode = h(<span class="string">'div'</span>, &#123;<span class="attr">style</span>: &#123;<span class="attr">color</span>: <span class="string">'#000'</span>&#125;&#125;, [</span><br><span class="line">  h(<span class="string">'h1'</span>, <span class="string">'Headline'</span>),</span><br><span class="line">  h(<span class="string">'p'</span>, <span class="string">'A paragraph'</span>),</span><br><span class="line">]);</span><br></pre></td></tr></table></figure>
+
+<p>vnode可以用多种方式来生成  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">h(&apos;div&apos;)  </span><br><span class="line">h(&apos;div&apos;,&#123;属性对象&#125;)</span><br><span class="line">h(&apos;div&apos;,&#123;&#125;,[后代数组])</span><br><span class="line">function h(sel,b?,c?)&#123;...&#125;</span><br></pre></td></tr></table></figure>
+
+<p>所以为h函数设置了重载，第二第三个参数可以为undefined<br>首先对第三个参数进行判断是否存在，存在则也要判断具体的类型，再判断第二个，SVG会另外运行，其他的情况下，就会直接得到一个vnode对象<br>h方法就结束了</p>
+<h4 id="vnode-ts"><a href="#vnode-ts" class="headerlink" title="vnode.ts"></a>vnode.ts</h4><p>vnode进行了Vnode和VnodeData对象的封装，同时返回了生成vnode的函数</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> interface VNode &#123;</span><br><span class="line">  sel: string | <span class="literal">undefined</span>; <span class="comment">//目标元素</span></span><br><span class="line">  data: VNodeData | <span class="literal">undefined</span>; <span class="comment">// 属性信息</span></span><br><span class="line">  children: <span class="built_in">Array</span>&lt;VNode | string&gt; | <span class="literal">undefined</span>; <span class="comment">// 后代信息</span></span><br><span class="line">  elm: Node | <span class="literal">undefined</span>; <span class="comment">// 节点信息，应该是真实DOM</span></span><br><span class="line">  text: string | <span class="literal">undefined</span>;</span><br><span class="line">  key: Key | <span class="literal">undefined</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">vnode</span>(<span class="params">sel: string | undefined,</span></span></span><br><span class="line"><span class="function"><span class="params">                      data: any | undefined,</span></span></span><br><span class="line"><span class="function"><span class="params">                      children: Array&lt;VNode | string&gt; | undefined,</span></span></span><br><span class="line"><span class="function"><span class="params">                      text: string | undefined,</span></span></span><br><span class="line"><span class="function"><span class="params">                      elm: Element | Text | undefined</span>): <span class="title">VNode</span> </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> key = data === <span class="literal">undefined</span> ? <span class="literal">undefined</span> : data.key;</span><br><span class="line">  <span class="keyword">return</span> &#123;sel, data, children, text, elm, key&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="patch"><a href="#patch" class="headerlink" title="patch"></a>patch</h3><p>在官网实例中，接下来进行patch，就可以将目标元素与虚拟DOM对象进行替换了。<code>patch(dom,vnode)</code>，所以直接进入snabbdom.ts寻找patch方法  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">patch(<span class="built_in">document</span>.getElementById(<span class="string">''</span>),vnode)</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>判断<strong>cbs</strong>钩子函数中是否存在preHook钩子，如果有的话，会预先执行  </li>
+<li>判断传入的第一个参数是否是vnode，如果不是（Element）则生成一个vnode替换  </li>
+<li>比较新旧vnode是否相同，如果相同则直接渲染，如果不同则处理并把新节点（Element）放到旧节点的位置  </li>
+<li>执行新增节点队列的InsertHook钩子函数</li>
+<li>处理<strong>cbs</strong>中的PostHook钩子函数（如果有）</li>
+</ol>
+<h4 id="处理ProHook钩子函数"><a href="#处理ProHook钩子函数" class="headerlink" title="处理ProHook钩子函数"></a>处理ProHook钩子函数</h4><p>在官网的教程中，这里传入了Style和Css的模块，可以理解为进行样式方面的初始化，预处理。  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> styleModule = &#123;</span><br><span class="line">  pre: forceReflow,</span><br><span class="line">  create: updateStyle,</span><br><span class="line">  update: updateStyle,</span><br><span class="line">  destroy: applyDestroyStyle,</span><br><span class="line">  remove: applyRemoveStyle</span><br><span class="line">&#125; <span class="keyword">as</span> Module;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> classModule = &#123;<span class="attr">create</span>: updateClass, <span class="attr">update</span>: updateClass&#125; <span class="keyword">as</span> Module;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> classModule;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，只有Style模块具有Pre钩子函数。其中钩子的作用就是<code>设置reflowForced变量为false</code></p>
+<h4 id="替换vnode"><a href="#替换vnode" class="headerlink" title="替换vnode"></a>替换vnode</h4><p>这一步主要是判断要替换的旧节点，是否是vnode虚拟节点。</p>
+<blockquote>
+<p>vue也有判断、替换的过程，它相比Snabbdom，携带了哪些更多的内容？  </p>
+</blockquote>
+<p>对于Element节点，根据标签Tag，Id，ClassName来生成vnode，key值是undefined<br>比较的依据是key与sel的全等</p>
+<blockquote>
+<p>key === new.key &amp;&amp; sel === new.sel</p>
+</blockquote>
+<p>这种情况下，与vnode比较是肯定不同的</p>
+<h4 id="比较新旧vnode"><a href="#比较新旧vnode" class="headerlink" title="比较新旧vnode"></a>比较新旧vnode</h4><p>在不同vnode的情况下：<br>主要内容就是<code>生成新Element节点</code>和<code>移除旧Element节点</code><br>在生成新Element节点的过程中，感觉也没有什么特别的地方，就是根据vnode.sel来决定元素的标签，id，class。然后递归转换children，其中对各种节点都进行判断，Comment，Text，Element，Ns。最后对<code>create钩子函数</code>做处理，如果vnode有对应的钩子函数，就添加vnode到队列中。等到所有的元素都生成完毕后，进行统一的CreateHook调用。</p>
+<p>而对于相同vnode，就是一个Patch的过程：</p>
+<blockquote>
+<p>PS : 感觉相同的情况下还复杂点耶  </p>
+</blockquote>
+<p>首先进行PrePatch钩子函数的处理（如果有）<br><span id="Branch1">Branch 1</span> 然后判断新vnode是否存在text</p>
+<blockquote>
+<p>话说这个text是什么阿？看vnode定义，很少有第四个参数，不对。在h()中，text是第2，第3参数为Primate类型的情况下才会存在。如果没有text，说明当时h()方法中，不存在Primate类型的参数。  </p>
+</blockquote>
+<p>然后进入一个重要的判断，当新旧vnode都有Children节点，并且CHildren节点还不相同的时候，进行更新节点操作，这个地方就是重中之重  </p>
+<blockquote>
+<p>旧Vnode的Children是怎么来的？就是说简单的例子，用div+getElementById是触发不到这里的。只能是两个vnode进行Patch。</p>
+</blockquote>
+<p><strong>如何进行后代元素的比较更新？</strong><br><img src="https://i.loli.net/2019/09/15/N7XLjRSAatc5W93.png" alt="Diff算法.png">  </p>
+<p><img src="https://i.loli.net/2019/09/15/XMNq9OywRzmU7H1.png" alt="Diff算法实例.png">  </p>
+<p>如果只存在当前vnode的Children对象，则在旧vnode.text存在的情况下，设置当前节点的text为空，然后填充新vnode的后代到当前元素</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">伪代码</span><br><span class="line">if(isDef(oldVnode.text))  set ele.text = &apos;&apos;;</span><br><span class="line">ele.insertBefore(..) // 后代通过insertBefore填充到ele中</span><br></pre></td></tr></table></figure>
+
+<p>反之，如果只定义了oldVnode的Children对象，则需要将ele中所有之前的子元素都清空，反正就是考虑如何删除element的后代和调用Destroy钩子    </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">伪代码 removeVnodes</span><br><span class="line">invokeDestroy() : children + children.children(!= text)  </span><br><span class="line"></span><br><span class="line">cbs.remove() , data.hooks.remove(),in last =&gt; ele.removeChild(children.element)</span><br><span class="line">or</span><br><span class="line">children.sel == null =&gt; children is Node text =&gt; ele.removeCHild(children.element)</span><br></pre></td></tr></table></figure>
+
+<p>如果都没有后代，oldVnode.text不为空，那么旧把当前ele的text设置为空</p>
+<blockquote>
+<p>等到什么时候再写入text？</p>
+</blockquote>
+<p>在 <a href="#Branch1">Branch1</a>，如果vnode有text属性，那么说明现在只需要渲染成一个TextNode，所以在之前存在CHildren的情况下清空</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">伪代码</span><br><span class="line">if(vnode.text !== oldVnode.text)&#123;</span><br><span class="line">   if(oldValue.children exists) removeChild(oldVnode.Children) </span><br><span class="line">   set element.text = vnode.text</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最后执行<code>PostPatch钩子函数</code></p>
+<h1 id="收获"><a href="#收获" class="headerlink" title="收获"></a>收获</h1><ol>
+<li>在粗略看完Snabbdom的源码后，了解了Diff算法的规则。  </li>
+<li>了解到一种新的赋值并判断的方式<blockquote>
+<p>if((i = data.hook) != undefined &amp;&amp; (i = i.pre) != undefined) {…}</p>
+</blockquote>
+</li>
+</ol>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -178,301 +297,106 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/09/14/虚拟DOM的Patch/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/09/08/Javascript中的事件类型2/" class="archive-article-date">
-  	<time datetime="2019-09-08T02:48:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-08</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/09/08/Javascript中的事件类型2/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">每日一问·Javascript中的事件类型(2)</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/09/08/Javascript中的事件类型2/">每日一问·Javascript中的事件类型(2)</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">每日一问</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/09/05/为什么可以在CMD中执行npm命令/" class="archive-article-date">
-  	<time datetime="2019-09-05T14:30:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-05</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/09/05/为什么可以在CMD中执行npm命令/">为什么可以在CMD中执行npm命令</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">每日一问</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">计算机</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/09/04/Javascript中的事件类型1/" class="archive-article-date">
-  	<time datetime="2019-09-04T12:06:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-04</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/09/04/Javascript中的事件类型1/">Javascript中的事件类型(1)</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">每日一问</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/09/03/Javascript中的立即执行函数/" class="archive-article-date">
-  	<time datetime="2019-09-03T14:29:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-03</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/09/03/Javascript中的立即执行函数/">Javascript中的立即执行函数</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">每日一问</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/21/Vue组件-右键菜单/" class="archive-article-date">
-  	<time datetime="2019-08-21T14:32:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/21/Vue组件-右键菜单/">Vue组件-右键菜单</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/07/22/隐式类型转换/" class="archive-article-date">
-  	<time datetime="2019-07-22T15:02:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-22</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/22/隐式类型转换/">隐式类型转换</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/07/03/如何修改Hexo主题yilia/" class="archive-article-date">
-  	<time datetime="2019-07-03T14:38:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-03</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/03/如何修改Hexo主题yilia/">如何修改Hexo主题yilia</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -495,8 +419,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

@@ -18,7 +18,7 @@
 <meta property="og:description" content="写这边博文的契机，是在阅读Sortable.js源码的时候，发现了他们对dragable、pointenter事件的使用，还有事件的创建等等，这些都是以往没有接触过的，只使用了click，并没有深入理解事件的类型等。事件远不止click。本文主要介绍了各种事件类型。【未完】">
 <meta property="og:locale" content="Chinese">
 <meta property="og:image" content="https://i.loli.net/2019/09/08/te97bkqNoEX2AFh.png">
-<meta property="og:updated_time" content="2019-09-14T11:34:05.846Z">
+<meta property="og:updated_time" content="2019-09-14T16:43:04.428Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="每日一问·Javascript中的事件类型(2)">
 <meta name="twitter:description" content="写这边博文的契机，是在阅读Sortable.js源码的时候，发现了他们对dragable、pointenter事件的使用，还有事件的创建等等，这些都是以往没有接触过的，只使用了click，并没有深入理解事件的类型等。事件远不止click。本文主要介绍了各种事件类型。【未完】">
@@ -220,6 +220,8 @@
 <p>首先注意一点，元素本身是不允许拖动的，必须为元素增加<code>draggable</code>属性，并设置为true字符串，才可以拖动元素！！！</p>
 </blockquote>
 <p>TODO 接下来介绍相关的事件，以及属性</p>
+<h3 id="相关属性-3"><a href="#相关属性-3" class="headerlink" title="相关属性"></a>相关属性</h3><p><strong>dragTransfer</strong>  </p>
+<h3 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h3><p><strong>drag</strong><br>drag事件将发生在不断执行拖动的过程中<br><strong>dragstart,dragend</strong><br>dragStart事件只会发生在拖动最开始的时候,而end事件则是松开鼠标完成拖动的时候<br><strong>dragenter,dragleave</strong><br>enter和leave用来表示进入和离开，目标是可放置元素或者body。进入这两种有啥区别呢？<br>添加事件的元素，将被作为目标元素，比如我们为div内的元素p添加了dragenter事件，那么只有当某个拖动元素，进入到p元素的时候，才会触发dragenter事件，进入div是不会触发的，而且，事件并不是绑定在拖动元素上的！！！<br><strong>deagover</strong>  </p>
 <h2 id="ClipboardEvent"><a href="#ClipboardEvent" class="headerlink" title="ClipboardEvent"></a>ClipboardEvent</h2><p>剪贴板事件，用来实现复制粘贴。还是说回富文本框</p>
 <h2 id="CompositionEvent"><a href="#CompositionEvent" class="headerlink" title="CompositionEvent"></a>CompositionEvent</h2><p>文本输入事件。继续富文本框</p>
 <h2 id="媒体事件"><a href="#媒体事件" class="headerlink" title="媒体事件"></a>媒体事件</h2><p>media,audio</p>
@@ -330,6 +332,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2019/09/14/虚拟DOM的Patch/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          每日一问·虚拟DOM是如何实现的
+        
+      </div>
+    </a>
   
   
     <a href="/2019/09/05/为什么可以在CMD中执行npm命令/" id="article-nav-older" class="article-nav-link-wrap">
@@ -473,6 +484,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Javascript</a>
               </li>
             
             <div class="clearfix"></div>
