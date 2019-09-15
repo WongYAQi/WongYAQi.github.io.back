@@ -189,3 +189,5 @@ if(vnode.text !== oldVnode.text){
 1. 在粗略看完Snabbdom的源码后，了解了Diff算法的规则。  
 2. 了解到一种新的赋值并判断的方式
 > if((i = data.hook) != undefined && (i = i.pre) != undefined) {...}
+
+虽然看完了，但是内心还是有一些疑惑，相比于一般的DOM操作，这种方式的优点到底在哪里呢？这里面仍然要进行DOM操作，为什么说能够提高效率呢？是因为操作数据量小，所以体现不出来效果吗？  
