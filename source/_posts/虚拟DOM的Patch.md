@@ -145,11 +145,13 @@ export default classModule;
 <span id="Branch1">Branch 1</span> 然后判断新vnode是否存在text
 > 话说这个text是什么阿？看vnode定义，很少有第四个参数，不对。在h()中，text是第2，第3参数为Primate类型的情况下才会存在。如果没有text，说明当时h()方法中，不存在Primate类型的参数。  
 
-然后进入一个重要的判断，当新旧vnode都有Children节点，并且CHildren节点还不相同的时候，进行更新节点操作  
+然后进入一个重要的判断，当新旧vnode都有Children节点，并且CHildren节点还不相同的时候，进行更新节点操作，这个地方就是重中之重  
 > 旧Vnode的Children是怎么来的？就是说简单的例子，用div+getElementById是触发不到这里的。只能是两个vnode进行Patch。
 
-**如何进行后代元素的比较更新？**
-//FIXME 
+**如何进行后代元素的比较更新？**  
+![Diff算法.png](https://i.loli.net/2019/09/15/N7XLjRSAatc5W93.png)  
+
+![Diff算法实例.png](https://i.loli.net/2019/09/15/XMNq9OywRzmU7H1.png)  
 
 
 如果只存在当前vnode的Children对象，则在旧vnode.text存在的情况下，设置当前节点的text为空，然后填充新vnode的后代到当前元素
@@ -182,3 +184,8 @@ if(vnode.text !== oldVnode.text){
 ```
 
 最后执行`PostPatch钩子函数`
+
+# 收获
+1. 在粗略看完Snabbdom的源码后，了解了Diff算法的规则。  
+2. 了解到一种新的赋值并判断的方式
+> if((i = data.hook) != undefined && (i = i.pre) != undefined) {...}
