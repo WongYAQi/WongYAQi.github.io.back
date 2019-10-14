@@ -1,10 +1,10 @@
 ---
 title: 浏览器粘贴事件以及File类型
 date: 2019-09-24 22:33:59
-tags: [每日一问,Javascript]
+tags: [每日一问,javascript]
 ---
 
-浏览器粘贴事件以及File类型
+浏览器粘贴事件以及File类型，实例mavon-editor【未完】
 <!--more-->
 
 浏览器粘贴事件，当使用鼠标右键、Ctrl+V时，在浏览器内，会触发`paste`事件，paste事件会携带粘贴对应的数据信息
