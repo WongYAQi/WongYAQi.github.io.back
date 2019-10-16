@@ -7,20 +7,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>隐式类型转换 | YAQi的博客</title>
+  <title>Javascript中的文件类型 | YAQi的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="javascript的隐式类型转换规则">
-<meta name="keywords" content="javascript">
+  <meta name="description" content="Javascript中的文件类型，File">
+<meta name="keywords" content="每日一问,javascript">
 <meta property="og:type" content="article">
-<meta property="og:title" content="隐式类型转换">
-<meta property="og:url" content="http://yoursite.com/2019/07/22/隐式类型转换/index.html">
+<meta property="og:title" content="Javascript中的文件类型">
+<meta property="og:url" content="http://yoursite.com/2019/10/14/Javascript中的文件类型/index.html">
 <meta property="og:site_name" content="YAQi的博客">
-<meta property="og:description" content="javascript的隐式类型转换规则">
+<meta property="og:description" content="Javascript中的文件类型，File">
 <meta property="og:locale" content="Chinese">
-<meta property="og:updated_time" content="2019-09-03T15:24:31.662Z">
+<meta property="og:updated_time" content="2019-10-16T13:46:19.689Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="隐式类型转换">
-<meta name="twitter:description" content="javascript的隐式类型转换规则">
+<meta name="twitter:title" content="Javascript中的文件类型">
+<meta name="twitter:description" content="Javascript中的文件类型，File">
   
     <link rel="alternative" href="/atom.xml" title="YAQi的博客" type="application/atom+xml">
   
@@ -138,41 +138,68 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-隐式类型转换" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Javascript中的文件类型" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      隐式类型转换
+      Javascript中的文件类型
     </h1>
   
 
         
-        <a href="/2019/07/22/隐式类型转换/" class="archive-article-date">
-  	<time datetime="2019-07-22T15:02:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-22</time>
+        <a href="/2019/10/14/Javascript中的文件类型/" class="archive-article-date">
+  	<time datetime="2019-10-14T14:40:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-14</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>javascript的隐式类型转换规则</p>
+        <p>Javascript中的文件类型，File</p>
 <a id="more"></a>
-<h3 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h3><p>为什么会产生隐式类型转换？<br>==，+两边的值的类型不同，就会发生隐式类型转换。转换得到的是Primitive类型值。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"> [] == <span class="literal">false</span>  <span class="comment">//  true</span></span><br><span class="line">!![] == <span class="literal">true</span>  <span class="comment">//  true</span></span><br><span class="line">!!<span class="string">''</span> == <span class="literal">false</span>  <span class="comment">//  true</span></span><br><span class="line">[<span class="number">1</span>] == <span class="string">'1'</span>  <span class="comment">//  true</span></span><br><span class="line"><span class="string">''</span> == <span class="number">0</span>  <span class="comment">// true</span></span><br><span class="line"><span class="string">''</span> == <span class="literal">false</span>  <span class="comment">//  true</span></span><br><span class="line">[<span class="number">1</span>] == <span class="literal">true</span>  <span class="comment">//  true</span></span><br><span class="line"><span class="literal">null</span> == <span class="number">0</span>  <span class="comment">//  false</span></span><br><span class="line"><span class="literal">null</span> == <span class="string">''</span>  <span class="comment">// false</span></span><br><span class="line"><span class="literal">null</span> == <span class="literal">undefined</span>  <span class="comment">// true</span></span><br><span class="line">![] == [] <span class="comment">//  true</span></span><br><span class="line">!&#123;&#125; == &#123;&#125; <span class="comment">//  false</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="转换规则"><a href="#转换规则" class="headerlink" title="转换规则"></a>转换规则</h3><p>转换的几种形式</p>
-<h4 id="引用类型"><a href="#引用类型" class="headerlink" title="引用类型"></a>引用类型</h4><p>将引用类型转换为基础类型，会使用对象的toString方法和valueOf方法。根据具体情况来判断应该先使用哪一种。</p>
-<h4 id="一元运算符"><a href="#一元运算符" class="headerlink" title="+一元运算符"></a>+一元运算符</h4><p>+一元运算符会将变量转换为Number类型,使用toNumber方法</p>
-<h4 id="一元运算符-1"><a href="#一元运算符-1" class="headerlink" title="!一元运算符"></a>!一元运算符</h4><p>!一元运算符会将变量转换为Blooean类型，只有以下几种转换为true，其余都为false</p>
-<p>null,undefined,NaN,’ ‘,0 ,false</p>
-<h4 id="加法运算符"><a href="#加法运算符" class="headerlink" title="+加法运算符"></a>+加法运算符</h4><p>+运算符优先将两边的变量转换为String类型，所以’1’ + 1 = ‘11’,而不是2.如果其中有引用类型，就需要将引用类型转换为原值Primitive进行操作，先使用toString能否得到原值，如果不能就进行valueOf，能否得到原值，如果都不能，则不能进行加法运算，会抛出异常</p>
-<h4 id="运算符"><a href="#运算符" class="headerlink" title="==运算符"></a>==运算符</h4><p>==运算符会优先将两边的变量转换为Number类型</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#125; == <span class="number">0</span> <span class="comment">//false</span></span><br><span class="line"><span class="number">1.</span>&#123;&#125;.valueOf() === &#123;&#125;,返回的仍然是一个引用类型，截下来使用toString(),<span class="attr">PS</span>:简写</span><br><span class="line"><span class="number">2.</span>&#123;&#125;.toString()返回的是<span class="string">'[object Object]'</span>，将这个值和<span class="number">0</span>比较，而其中无法转换为<span class="built_in">Number</span>类型</span><br><span class="line"><span class="number">3.</span>将两者转换为<span class="built_in">String</span>类型，比较<span class="string">'[object Object]'</span> 和 <span class="string">'0'</span></span><br></pre></td></tr></table></figure>
+<p>目前通过Html5操作文件，有两种方式，分别是input元素上传，或者通过拖动行为拖动</p>
+<ol>
+<li>Javascript是可以进行文件上传行为的，通过<em>type类型的input元素</em>，在完成了对应交互后，可以在元素的<code>files</code>属性中，得到FileList集合，集合元素就是我们上传的文件信息。  </li>
+<li>拖动行为，必须在为一个区域添加<code>drop事件</code>，在drop事件中，通过调用<code>dataTransfer</code>的相关属性，可以得到文件列表，继续完成文件操作。  </li>
+</ol>
+<blockquote>
+<p>ps: 在《Javascript中的事件类型2》中有讲到拖动事件</p>
+</blockquote>
+<blockquote>
+<p>ps: 看到这里，应该可以看到几种用途：拖动上传文件区域</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">File</span></span>&#123;</span><br><span class="line">    lastModified: <span class="built_in">Number</span>, <span class="comment">//最后修改时间，毫秒数</span></span><br><span class="line">    lastModifiedDate: <span class="built_in">Date</span>, <span class="comment">// '最后修改时间的Date类型对象'</span></span><br><span class="line">    name: <span class="built_in">String</span>, <span class="comment">//文件名</span></span><br><span class="line">    size: <span class="built_in">Number</span>, <span class="comment">//文件大小</span></span><br><span class="line">    type: MIME <span class="comment">//类型</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h4 id="特殊规则"><a href="#特殊规则" class="headerlink" title="特殊规则"></a>特殊规则</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> <span class="literal">null</span> == <span class="literal">undefined</span></span><br><span class="line"><span class="number">2.</span> <span class="literal">NaN</span> == <span class="literal">NaN</span> <span class="comment">//false</span></span><br><span class="line"><span class="number">3.</span> 除了<span class="built_in">Date</span>类型，其他的引用类型进行原始值转换，如果没有标记要目标类型，那么<span class="built_in">Date</span>是转换为<span class="built_in">Number</span>类型，其他的都是转换为<span class="built_in">String</span>类型</span><br><span class="line">++[[]][+[]]+[+[]]==<span class="number">10</span>?</span><br><span class="line">网传的一个变态的隐式类型转换题。依次来解析下</span><br><span class="line"><span class="number">1.</span>分两个部分，++[[]][+[]] 和 +[+[]]</span><br><span class="line"><span class="number">2.</span>+[] 得到的是一个<span class="built_in">Number</span>类型，也就是<span class="number">0</span></span><br><span class="line"><span class="number">3.</span>[[]] 得到的是一个数组，其中第一个元素是一个[]空数组</span><br><span class="line"><span class="number">4.</span>而[[]][<span class="number">0</span>]得到的就是这个数组的第一个元素，也就是这个空数组</span><br><span class="line"><span class="number">5.</span>++[]会进行<span class="built_in">Number</span>类型转换，[] =&gt; ‘’ =&gt; <span class="number">0</span> =&gt; ++<span class="number">0</span> =&gt; <span class="number">1</span></span><br><span class="line"><span class="number">6.</span>[+[]] 会成为[<span class="number">0</span>]，代表第一个元素是<span class="number">0</span>的数组</span><br><span class="line"><span class="number">7.1</span> + [<span class="number">0</span>] 会转换为<span class="built_in">String</span>类型，所以最后是’<span class="number">1</span>’+’<span class="number">0</span>’ 得到’<span class="number">10</span>’</span><br></pre></td></tr></table></figure>
+<h1 id="那么，我们得到了File对象，又该如何使用这些对象呢？"><a href="#那么，我们得到了File对象，又该如何使用这些对象呢？" class="headerlink" title="那么，我们得到了File对象，又该如何使用这些对象呢？"></a>那么，我们得到了File对象，又该如何使用这些对象呢？</h1><p>这里又要再介绍一个类型<code>window.URL</code>，它是一个DOM接口，实现了两个操作  </p>
+<ol>
+<li>createObjectURL(file)  </li>
+<li>revokeObjectURL(file)</li>
+</ol>
+<p>他们分别用来创建和清除一个URL对象。<em>URL对象的作用，就是让你能够像一个URL字符串一样使用它。</em></p>
+<blockquote>
+<p>“blob:<a href="http://localhost:8081/d6a6e952-5ddd-47fc-9b31-14e0d68051e2&quot;" target="_blank" rel="noopener">http://localhost:8081/d6a6e952-5ddd-47fc-9b31-14e0d68051e2&quot;</a> 这就是一个URL对象</p>
+</blockquote>
+<blockquote>
+<p>通过得到File对象后，生成URL对象，然后在Img元素的src属性上使用</p>
+</blockquote>
+<p>看到这里，是不是又发现了一个东西<em>blob</em>。其实blob才是javascript中最基础的文件类型。File是派生于blob的，暂且不讲。</p>
+<p>第二种比较常用的使用方式，通过<code>FileReader</code>对象，读取对应File对象的数据，最终以某种格式显示出来。比如把image类型的File，读取为base64字符串。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> file = files[<span class="number">0</span>]</span><br><span class="line"><span class="keyword">var</span> f = <span class="keyword">new</span> FileReader()</span><br><span class="line">f.readAsDataURL(file)</span><br><span class="line">f.onload = <span class="function"><span class="params">event</span> =&gt;</span> &#123;</span><br><span class="line">  vm.src = event.target.result</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>question: 为什么image可以显示base64字符串呢？</p>
+</blockquote>
+<p>比较常见的使用就到这里结束了，工作见到的无非就是图片的处理（最多），各种有关图片的效果<br>接下来，要讲一些原理、基础方面的东西。</p>
+<h1 id="Blob"><a href="#Blob" class="headerlink" title="Blob"></a>Blob</h1><p>Blob是Binary Large Object的缩写，代表二进制大对象。<br>作为一种数据类型，它能够从后端返回，前端通过ajax请求获取。前端想要处理二进制对象，都要通过它来处理。<br>Blob是Javascript的类文件对象，所有的文件对象都是从blob派生的。比如Input[type=’input’]产生的File对象。</p>
+<p>blob具有slice()方法， 能够从源blob中截取对应位置的数据。所以可以通过这种方式，将File对象切分，然后分片上传。</p>
+<h2 id="相关的使用方法"><a href="#相关的使用方法" class="headerlink" title="相关的使用方法"></a>相关的使用方法</h2><h3 id="隐藏视频文件信息"><a href="#隐藏视频文件信息" class="headerlink" title="隐藏视频文件信息"></a>隐藏视频文件信息</h3><p>通过生成ObjecrURL对象，来隐藏相关的信息</p>
+<h3 id="图片裁剪，预览"><a href="#图片裁剪，预览" class="headerlink" title="图片裁剪，预览"></a>图片裁剪，预览</h3><p>通过FileReader.readAsDataURL能够读取到二进制对象的Base64字符串。当然非图片类就读取不到了。</p>
+<h3 id="切片上传"><a href="#切片上传" class="headerlink" title="切片上传"></a>切片上传</h3><p>根据slice方法切片，然后每一段分别上传，具体实现要找个机会研究下。</p>
+
       
 
       
@@ -205,6 +232,10 @@
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">每日一问</a>
+        		</li>
+      		 
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
         		</li>
@@ -262,7 +293,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/07/22/隐式类型转换/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/10/14/Javascript中的文件类型/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -276,18 +307,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/08/21/Vue组件-右键菜单/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Vue组件-右键菜单
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/07/03/如何修改Hexo主题yilia/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">如何修改Hexo主题yilia</div>
+    <a href="/2019/10/11/图片裁剪原理及实现/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">图片裁剪原理及实现</div>
       <i class="icon-circle-right"></i>
     </a>
   

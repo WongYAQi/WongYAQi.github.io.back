@@ -7,20 +7,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>隐式类型转换 | YAQi的博客</title>
+  <title>浏览器粘贴事件以及File类型 | YAQi的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="javascript的隐式类型转换规则">
-<meta name="keywords" content="javascript">
+  <meta name="description" content="浏览器粘贴事件以及File类型，实例mavon-editor【未完】">
+<meta name="keywords" content="每日一问,javascript">
 <meta property="og:type" content="article">
-<meta property="og:title" content="隐式类型转换">
-<meta property="og:url" content="http://yoursite.com/2019/07/22/隐式类型转换/index.html">
+<meta property="og:title" content="浏览器粘贴事件以及File类型">
+<meta property="og:url" content="http://yoursite.com/2019/09/24/浏览器粘贴事件以及File类型/index.html">
 <meta property="og:site_name" content="YAQi的博客">
-<meta property="og:description" content="javascript的隐式类型转换规则">
+<meta property="og:description" content="浏览器粘贴事件以及File类型，实例mavon-editor【未完】">
 <meta property="og:locale" content="Chinese">
-<meta property="og:updated_time" content="2019-09-03T15:24:31.662Z">
+<meta property="og:updated_time" content="2019-10-14T14:41:37.334Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="隐式类型转换">
-<meta name="twitter:description" content="javascript的隐式类型转换规则">
+<meta name="twitter:title" content="浏览器粘贴事件以及File类型">
+<meta name="twitter:description" content="浏览器粘贴事件以及File类型，实例mavon-editor【未完】">
   
     <link rel="alternative" href="/atom.xml" title="YAQi的博客" type="application/atom+xml">
   
@@ -138,41 +138,34 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-隐式类型转换" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-浏览器粘贴事件以及File类型" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      隐式类型转换
+      浏览器粘贴事件以及File类型
     </h1>
   
 
         
-        <a href="/2019/07/22/隐式类型转换/" class="archive-article-date">
-  	<time datetime="2019-07-22T15:02:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-22</time>
+        <a href="/2019/09/24/浏览器粘贴事件以及File类型/" class="archive-article-date">
+  	<time datetime="2019-09-24T14:33:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-24</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>javascript的隐式类型转换规则</p>
+        <p>浏览器粘贴事件以及File类型，实例mavon-editor【未完】</p>
 <a id="more"></a>
-<h3 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h3><p>为什么会产生隐式类型转换？<br>==，+两边的值的类型不同，就会发生隐式类型转换。转换得到的是Primitive类型值。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"> [] == <span class="literal">false</span>  <span class="comment">//  true</span></span><br><span class="line">!![] == <span class="literal">true</span>  <span class="comment">//  true</span></span><br><span class="line">!!<span class="string">''</span> == <span class="literal">false</span>  <span class="comment">//  true</span></span><br><span class="line">[<span class="number">1</span>] == <span class="string">'1'</span>  <span class="comment">//  true</span></span><br><span class="line"><span class="string">''</span> == <span class="number">0</span>  <span class="comment">// true</span></span><br><span class="line"><span class="string">''</span> == <span class="literal">false</span>  <span class="comment">//  true</span></span><br><span class="line">[<span class="number">1</span>] == <span class="literal">true</span>  <span class="comment">//  true</span></span><br><span class="line"><span class="literal">null</span> == <span class="number">0</span>  <span class="comment">//  false</span></span><br><span class="line"><span class="literal">null</span> == <span class="string">''</span>  <span class="comment">// false</span></span><br><span class="line"><span class="literal">null</span> == <span class="literal">undefined</span>  <span class="comment">// true</span></span><br><span class="line">![] == [] <span class="comment">//  true</span></span><br><span class="line">!&#123;&#125; == &#123;&#125; <span class="comment">//  false</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="转换规则"><a href="#转换规则" class="headerlink" title="转换规则"></a>转换规则</h3><p>转换的几种形式</p>
-<h4 id="引用类型"><a href="#引用类型" class="headerlink" title="引用类型"></a>引用类型</h4><p>将引用类型转换为基础类型，会使用对象的toString方法和valueOf方法。根据具体情况来判断应该先使用哪一种。</p>
-<h4 id="一元运算符"><a href="#一元运算符" class="headerlink" title="+一元运算符"></a>+一元运算符</h4><p>+一元运算符会将变量转换为Number类型,使用toNumber方法</p>
-<h4 id="一元运算符-1"><a href="#一元运算符-1" class="headerlink" title="!一元运算符"></a>!一元运算符</h4><p>!一元运算符会将变量转换为Blooean类型，只有以下几种转换为true，其余都为false</p>
-<p>null,undefined,NaN,’ ‘,0 ,false</p>
-<h4 id="加法运算符"><a href="#加法运算符" class="headerlink" title="+加法运算符"></a>+加法运算符</h4><p>+运算符优先将两边的变量转换为String类型，所以’1’ + 1 = ‘11’,而不是2.如果其中有引用类型，就需要将引用类型转换为原值Primitive进行操作，先使用toString能否得到原值，如果不能就进行valueOf，能否得到原值，如果都不能，则不能进行加法运算，会抛出异常</p>
-<h4 id="运算符"><a href="#运算符" class="headerlink" title="==运算符"></a>==运算符</h4><p>==运算符会优先将两边的变量转换为Number类型</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#125; == <span class="number">0</span> <span class="comment">//false</span></span><br><span class="line"><span class="number">1.</span>&#123;&#125;.valueOf() === &#123;&#125;,返回的仍然是一个引用类型，截下来使用toString(),<span class="attr">PS</span>:简写</span><br><span class="line"><span class="number">2.</span>&#123;&#125;.toString()返回的是<span class="string">'[object Object]'</span>，将这个值和<span class="number">0</span>比较，而其中无法转换为<span class="built_in">Number</span>类型</span><br><span class="line"><span class="number">3.</span>将两者转换为<span class="built_in">String</span>类型，比较<span class="string">'[object Object]'</span> 和 <span class="string">'0'</span></span><br></pre></td></tr></table></figure>
+<p>浏览器粘贴事件，当使用鼠标右键、Ctrl+V时，在浏览器内，会触发<code>paste</code>事件，paste事件会携带粘贴对应的数据信息</p>
+<p>复制图片就是通过这种方式</p>
+<p>通过event.clipboardData.items 能够获得<code>DataTransferItem</code>类型数据<br>初始化FileReader对象reader，进行item.getAsFile()，能够获得一个File对象。<br>然后对reader.readAsDataUrl(file) ，能够得到一个包含result属性的对象。这个属性就是图片的Base64字符串</p>
+<p>目前微信的截图功能，能够很好的通过上述方式预览图片<br>但是QQ，TIM的截图功能，传递的并不是一个MIME类型为image/png类型的DataTransferItem对象，而是三个对象，他们分别是<br>text/plain的<code>[图片]</code>，text/html的IMG的图片HTML字符串，还有一个image/png类型的对象。但是第三个对象无法识别</p>
 
-<h4 id="特殊规则"><a href="#特殊规则" class="headerlink" title="特殊规则"></a>特殊规则</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> <span class="literal">null</span> == <span class="literal">undefined</span></span><br><span class="line"><span class="number">2.</span> <span class="literal">NaN</span> == <span class="literal">NaN</span> <span class="comment">//false</span></span><br><span class="line"><span class="number">3.</span> 除了<span class="built_in">Date</span>类型，其他的引用类型进行原始值转换，如果没有标记要目标类型，那么<span class="built_in">Date</span>是转换为<span class="built_in">Number</span>类型，其他的都是转换为<span class="built_in">String</span>类型</span><br><span class="line">++[[]][+[]]+[+[]]==<span class="number">10</span>?</span><br><span class="line">网传的一个变态的隐式类型转换题。依次来解析下</span><br><span class="line"><span class="number">1.</span>分两个部分，++[[]][+[]] 和 +[+[]]</span><br><span class="line"><span class="number">2.</span>+[] 得到的是一个<span class="built_in">Number</span>类型，也就是<span class="number">0</span></span><br><span class="line"><span class="number">3.</span>[[]] 得到的是一个数组，其中第一个元素是一个[]空数组</span><br><span class="line"><span class="number">4.</span>而[[]][<span class="number">0</span>]得到的就是这个数组的第一个元素，也就是这个空数组</span><br><span class="line"><span class="number">5.</span>++[]会进行<span class="built_in">Number</span>类型转换，[] =&gt; ‘’ =&gt; <span class="number">0</span> =&gt; ++<span class="number">0</span> =&gt; <span class="number">1</span></span><br><span class="line"><span class="number">6.</span>[+[]] 会成为[<span class="number">0</span>]，代表第一个元素是<span class="number">0</span>的数组</span><br><span class="line"><span class="number">7.1</span> + [<span class="number">0</span>] 会转换为<span class="built_in">String</span>类型，所以最后是’<span class="number">1</span>’+’<span class="number">0</span>’ 得到’<span class="number">10</span>’</span><br></pre></td></tr></table></figure>
       
 
       
@@ -205,6 +198,10 @@
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">每日一问</a>
+        		</li>
+      		 
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
         		</li>
@@ -262,7 +259,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/07/22/隐式类型转换/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/09/24/浏览器粘贴事件以及File类型/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -276,18 +273,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/08/21/Vue组件-右键菜单/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/10/11/图片裁剪原理及实现/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          Vue组件-右键菜单
+          图片裁剪原理及实现
         
       </div>
     </a>
   
   
-    <a href="/2019/07/03/如何修改Hexo主题yilia/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">如何修改Hexo主题yilia</div>
+    <a href="/2019/09/14/虚拟DOM的Patch/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">每日一问·虚拟DOM是如何实现的</div>
       <i class="icon-circle-right"></i>
     </a>
   
